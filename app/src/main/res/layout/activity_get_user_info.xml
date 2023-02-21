@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".GetUserInfoActivity">
+
+    <ProgressBar
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ProgressBar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/sportsEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittextshape"
+            android:hint="Favourite sports"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/ageEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittextshape"
+            android:hint="Age in years"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/heightEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittextshape"
+            android:hint="Height in cm"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textSize="18sp">
+
+        </EditText>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Select Gender"
+            android:textColor="@color/black"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/genderRg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:checked="true"
+                android:layout_margin="5dp"
+                android:id="@+id/maleRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male">
+
+            </RadioButton>
+
+            <RadioButton
+                android:layout_margin="5dp"
+                android:id="@+id/femaleRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FeMale">
+
+            </RadioButton>
+
+            <RadioButton
+                android:layout_margin="5dp"
+                android:id="@+id/otherRb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other">
+
+            </RadioButton>
+
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/complainBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btnshape"
+            android:onClick="continueBtn"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textSize="18sp">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

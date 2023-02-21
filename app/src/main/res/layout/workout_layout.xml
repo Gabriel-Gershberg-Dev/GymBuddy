@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/deleteIv"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/baseline_delete_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/nameTv"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/custom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/nameTv"
+                android:id="@+id/dateTv"
+                android:textSize="16sp"
+                android:fontFamily="@font/custom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

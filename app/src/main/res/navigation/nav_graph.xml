@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.gymbuddy.fragments.HomeFragment"
+        android:label="Choose your buddy"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/buddiesFragment"
+        android:name="com.example.gymbuddy.fragments.BuddiesFragment"
+        android:label="My buddies"
+        tools:layout="@layout/fragment_buddies" />
+    <fragment
+        android:id="@+id/workoutsFragment"
+        android:name="com.example.gymbuddy.fragments.WorkoutsFragment"
+        android:label="My workouts"
+        tools:layout="@layout/fragment_workouts" />
+    <fragment
+        android:id="@+id/showUserDetailsFragment"
+        android:name="com.example.gymbuddy.fragments.ShowUserDetailsFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_show_user_details" />
+    <fragment
+        android:id="@+id/requestWorkoutFragment"
+        android:name="com.example.gymbuddy.fragments.RequestWorkoutFragment"
+        android:label="Create Request"
+        tools:layout="@layout/fragment_request_workout" />
+    <fragment
+        android:id="@+id/workoutDetailFragment"
+        android:name="com.example.gymbuddy.fragments.WorkoutDetailFragment"
+        android:label="Workout details"
+        tools:layout="@layout/fragment_workout_detail" />
+    <fragment
+        android:id="@+id/receivedRequestsFragment"
+        android:name="com.example.gymbuddy.fragments.ReceivedRequestsFragment"
+        android:label="Workout requests"
+        tools:layout="@layout/fragment_received_requests" />
+</navigation>

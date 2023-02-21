@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:src="@drawable/baseline_account_circle_24"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+
+            </ImageView>
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Name"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/iv"
+                android:id="@+id/nameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_below="@id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:background="@drawable/buddybuttonshape"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:text="Email"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@id/iv"
+                    android:id="@+id/emailTv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <TextView
+                    android:background="@drawable/buddybuttonshape"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:text="Workout"
+                    android:layout_margin="10dp"
+                    android:layout_toRightOf="@id/iv"
+                    android:id="@+id/requestTv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
