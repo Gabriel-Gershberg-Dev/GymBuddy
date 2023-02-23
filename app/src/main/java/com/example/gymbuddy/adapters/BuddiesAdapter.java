@@ -19,6 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.gymbuddy.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,13 +40,13 @@ public class BuddiesAdapter extends RecyclerView.Adapter<BuddiesAdapter.BuddiesV
     public BuddiesAdapter(List<String> list, Activity activity) {
         this.list = list;
         this.context = activity;
-        navController= Navigation.findNavController(activity,R.id.notesNavHostFragment);
+        navController = Navigation.findNavController(activity, R.id.notesNavHostFragment);
     }
 
     @NonNull
     @Override
     public BuddiesVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.buddies_layout,null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.buddies_layout, null);
         return new BuddiesVH(view);
     }
 
@@ -54,21 +55,15 @@ public class BuddiesAdapter extends RecyclerView.Adapter<BuddiesAdapter.BuddiesV
         FirebaseFirestore.getInstance().collection("Users").document(list.get(position)).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
+                if (documentSnapshot.exists()) {
                     holder.nameTv.setText(documentSnapshot.getString("name"));
-                    if (documentSnapshot.getString("gender").equals("Male")){
-                        holder.iv.setImageResource(R.drawable.malegym);
-                    } else if (documentSnapshot.getString("gender").equals("FeMale")) {
-                        holder.iv.setImageResource(R.drawable.femalegym);
-                    }else {
-                        holder.iv.setImageResource(R.drawable.othergym);
-                    }
+                    Glide.with(context).load(documentSnapshot.getString("image")).into(holder.iv);
                     holder.itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bundle bundle=new Bundle();
-                            bundle.putString("userId",list.get(position));
-                            navController.navigate(R.id.showUserDetailsFragment,bundle);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("userId", list.get(position));
+                            navController.navigate(R.id.showUserDetailsFragment, bundle);
 
                         }
                     });
@@ -79,7 +74,7 @@ public class BuddiesAdapter extends RecyclerView.Adapter<BuddiesAdapter.BuddiesV
                             Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
                             emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             emailIntent.setType("message/rfc822");
-                            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {documentSnapshot.getString("email")});
+                            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{documentSnapshot.getString("email")});
                             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Workout");
                             context.startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
 
@@ -90,9 +85,9 @@ public class BuddiesAdapter extends RecyclerView.Adapter<BuddiesAdapter.BuddiesV
                     holder.requestTv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bundle bundle=new Bundle();
-                            bundle.putString("userId",list.get(position));
-                            navController.navigate(R.id.requestWorkoutFragment,bundle);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("userId", list.get(position));
+                            navController.navigate(R.id.requestWorkoutFragment, bundle);
 
                         }
                     });
@@ -106,15 +101,16 @@ public class BuddiesAdapter extends RecyclerView.Adapter<BuddiesAdapter.BuddiesV
         return list.size();
     }
 
-    class BuddiesVH extends RecyclerView.ViewHolder{
-      TextView nameTv,requestTv,emailTv;
-      ImageView iv;
+    class BuddiesVH extends RecyclerView.ViewHolder {
+        TextView nameTv, requestTv, emailTv;
+        ImageView iv;
+
         public BuddiesVH(@NonNull View itemView) {
             super(itemView);
-            nameTv=itemView.findViewById(R.id.nameTv);
-            requestTv=itemView.findViewById(R.id.requestTv);
-            emailTv=itemView.findViewById(R.id.emailTv);
-            iv=itemView.findViewById(R.id.iv);
+            nameTv = itemView.findViewById(R.id.nameTv);
+            requestTv = itemView.findViewById(R.id.requestTv);
+            emailTv = itemView.findViewById(R.id.emailTv);
+            iv = itemView.findViewById(R.id.iv);
         }
     }
 }

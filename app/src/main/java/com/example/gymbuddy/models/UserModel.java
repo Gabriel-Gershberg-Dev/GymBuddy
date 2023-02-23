@@ -1,7 +1,12 @@
 package com.example.gymbuddy.models;
 
+import android.net.Uri;
+
+import java.net.URI;
+
 public class UserModel {
-    String age,email,gender,name,sports,uid,height;
+    String age, email, gender, name, sports, uid, image, height;
+
 
     public UserModel() {
     }
@@ -42,6 +47,10 @@ public class UserModel {
         return name;
     }
 
+    public String getImage() {
+        return this.image;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -61,4 +70,12 @@ public class UserModel {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
+
+
 }

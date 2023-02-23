@@ -1,5 +1,9 @@
 package com.example.gymbuddy.fragments;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.ContentResolver;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -115,7 +119,7 @@ public class HomeFragment extends Fragment {
         cardStackView.setLayoutManager(manager);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
 
-        getData();
+      getData();
 
         return view;
     }
@@ -127,8 +131,8 @@ public class HomeFragment extends Fragment {
         FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Buddies").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot documentSnapshot:queryDocumentSnapshots){
-                    if (documentSnapshot.exists()){
+                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    if (documentSnapshot.exists()) {
                         buddylist.add(documentSnapshot.getId());
                     }
                 }
@@ -139,7 +143,7 @@ public class HomeFragment extends Fragment {
                         list.clear();
                         for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             if (documentSnapshot.exists()) {
-                                if (!documentSnapshot.toObject(UserModel.class).getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())&&!buddylist.contains(documentSnapshot.getId())){
+                                if (!documentSnapshot.toObject(UserModel.class).getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) && !buddylist.contains(documentSnapshot.getId())) {
                                     list.add(documentSnapshot.toObject(UserModel.class));
                                 }
 
@@ -159,7 +163,23 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
     }
+//        public void permission1(){
+//            Intent intent= new Intent();
+//            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+//            intent.addCategory(Intent.CATEGORY_DEFAULT);
+//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            startActivityForResult(intent,12);
+//        }
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (requestCode == 12 && resultCode == RESULT_OK) {
+//            final ContentResolver resolver = requireActivity().getContentResolver();
+//            resolver.takePersistableUriPermission(data.getData(),
+//                    Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+//            getData();
+//        }/*from   ww w.  j ava  2 s . co  m*/
+//    }
+
 }

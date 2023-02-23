@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".GetUserInfoActivity">
+    <ImageView
+        android:id="@+id/profilePic"
+        android:src="@drawable/download"
+        android:layout_centerHorizontal="true"
+        android:layout_width="120dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="120dp">
 
+
+    </ImageView>
     <ProgressBar
         android:layout_centerInParent="true"
         android:visibility="gone"
@@ -21,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/profilePic"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
@@ -116,6 +126,18 @@
 
 
         <Button
+            android:id="@+id/uploadPicBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/btnshape"
+            android:onClick="choosePicture"
+            android:text="Upload profile picture"
+            android:textAllCaps="false"
+            android:textSize="18sp">
+
+        </Button>
+        <Button
             android:id="@+id/complainBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,7 +149,6 @@
             android:textSize="18sp">
 
         </Button>
-
 
     </LinearLayout>
 

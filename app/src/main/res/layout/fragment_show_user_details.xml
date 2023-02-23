@@ -15,7 +15,7 @@
     </ProgressBar>
 
     <ImageView
-        android:id="@+id/vi"
+        android:id="@+id/userDetails_profilePic"
         android:src="@drawable/download"
         android:layout_centerHorizontal="true"
         android:layout_width="120dp"
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/nameTv"
-        android:layout_below="@+id/vi"
+        android:layout_below="@+id/userDetails_profilePic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Name"

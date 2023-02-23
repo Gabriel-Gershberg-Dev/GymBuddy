@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.gymbuddy.R;
 import com.example.gymbuddy.SelectLocActivity;
+import com.example.gymbuddy.models.UserModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

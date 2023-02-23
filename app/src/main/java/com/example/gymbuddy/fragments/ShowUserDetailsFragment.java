@@ -1,5 +1,7 @@
 package com.example.gymbuddy.fragments;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.gymbuddy.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,10 +36,11 @@ import java.util.Map;
 
 public class ShowUserDetailsFragment extends Fragment {
 
-    String userId;
-    TextView nameTv, emailTv, dobTv, genderTv, heightTv,sportsTv;
-    ProgressBar progress_bar;
-    Button actionBtn;
+    private String userId;
+    private TextView nameTv, emailTv, dobTv, genderTv, heightTv, sportsTv;
+    private ProgressBar progress_bar;
+    private Button actionBtn;
+    private ImageView profilePic;
 
 
     public ShowUserDetailsFragment() {
@@ -45,9 +50,9 @@ public class ShowUserDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle=getArguments();
-        if (bundle!=null){
-            userId=bundle.getString("userId");
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            userId = bundle.getString("userId");
         }
     }
 
@@ -55,28 +60,21 @@ public class ShowUserDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_show_user_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_show_user_details, container, false);
+        findViews(view);
 
-        nameTv=view.findViewById(R.id.nameTv);
-        emailTv=view.findViewById(R.id.emailTv);
-        dobTv=view.findViewById(R.id.dobTv);
-        genderTv=view.findViewById(R.id.genderTv);
-        heightTv=view.findViewById(R.id.heightTv);
-        sportsTv=view.findViewById(R.id.sportTv);
-        progress_bar=view.findViewById(R.id.progress_bar);
-        actionBtn=view.findViewById(R.id.actionBtn);
 
         actionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (actionBtn.getText().toString().equals("Add as buddy")){
+                if (actionBtn.getText().toString().equals("Add as buddy")) {
 
                     //Adding user as a buddy and changing action button status
 
                     progress_bar.setVisibility(View.VISIBLE);
-                    Map map=new HashMap();
-                    map.put("status","yes");
+                    Map map = new HashMap();
+                    map.put("status", "yes");
                     map.put("date", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
                     FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Buddies").document(userId).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -91,8 +89,7 @@ public class ShowUserDetailsFragment extends Fragment {
                             });
                         }
                     });
-                }
-                else {
+                } else {
 
                     //removing user from buddies and changing action button status
 
@@ -118,18 +115,31 @@ public class ShowUserDetailsFragment extends Fragment {
         return view;
     }
 
+    private void findViews(View view) {
+        nameTv = view.findViewById(R.id.nameTv);
+        emailTv = view.findViewById(R.id.emailTv);
+        dobTv = view.findViewById(R.id.dobTv);
+        genderTv = view.findViewById(R.id.genderTv);
+        heightTv = view.findViewById(R.id.heightTv);
+        sportsTv = view.findViewById(R.id.sportTv);
+        progress_bar = view.findViewById(R.id.progress_bar);
+        actionBtn = view.findViewById(R.id.actionBtn);
+        profilePic = view.findViewById(R.id.userDetails_profilePic);
+    }
+
 
     //Fetching the data of specific user from firestore to show its details to current user
     private void loadData() {
         FirebaseFirestore.getInstance().collection("Users").document(userId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                nameTv.setText(documentSnapshot.getString("name") );
+                nameTv.setText(documentSnapshot.getString("name"));
                 emailTv.setText(documentSnapshot.getString("email"));
-                dobTv.setText(documentSnapshot.getString("age")+" years old");
+                dobTv.setText(documentSnapshot.getString("age") + " years old");
                 genderTv.setText(documentSnapshot.getString("gender"));
-                heightTv.setText(documentSnapshot.getString("height")+" cm");
+                heightTv.setText(documentSnapshot.getString("height") + " cm");
                 sportsTv.setText(documentSnapshot.getString("sports"));
+                Glide.with(getContext()).load(documentSnapshot.get("image")).into(profilePic);
 
                 //Checking if the user is alredy buddy or not and then showing "Add as buddy" or "Remove from buddies" button respectively
 
@@ -137,11 +147,11 @@ public class ShowUserDetailsFragment extends Fragment {
                 FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Buddies").document(userId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
-                            if (task.getResult().exists()){
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
                                 actionBtn.setEnabled(true);
                                 actionBtn.setText("Remove from buddies");
-                            }else {
+                            } else {
                                 actionBtn.setEnabled(true);
                                 actionBtn.setText("Add as buddy");
                             }
@@ -149,7 +159,6 @@ public class ShowUserDetailsFragment extends Fragment {
                         }
                     }
                 });
-
 
 
             }
@@ -161,5 +170,4 @@ public class ShowUserDetailsFragment extends Fragment {
             }
         });
     }
-
 }
