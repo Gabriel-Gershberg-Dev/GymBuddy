@@ -91,7 +91,7 @@ public class SelectLocActivity extends AppCompatActivity implements OnMapReadyCa
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("lat",lat);
                 returnIntent.putExtra("lng",lng);
-                returnIntent.putExtra("add",address);
+                returnIntent.putExtra("ahd",address);
                 setResult(Activity.RESULT_OK,returnIntent);
                 onBackPressed();
                 finish();
